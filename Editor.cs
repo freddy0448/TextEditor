@@ -20,19 +20,11 @@ namespace Microsoft.TextEditor
 
                 if (result == DialogResult.Yes)
                 {
-                    SaveFileDialog saveFileDialog = new SaveFileDialog();
-                    saveFileDialog.Filter = "Text File (.txt)|*.txt";
-                    saveFileDialog.Title = ProductName;
-
-
-                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        File.WriteAllText(saveFileDialog.FileName, richTextBox1.Text);
-                    }
+                    saveDialogResult();
                 }
                 else
                 {
-                    Application.Exit();
+                    richTextBox1.Clear();
                 }
 
             }
@@ -54,16 +46,7 @@ namespace Microsoft.TextEditor
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Text File (.txt)|*.txt";
-            saveFileDialog.Title = ProductName;
-
-
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                File.WriteAllText(saveFileDialog.FileName, richTextBox1.Text);
-            }
-
+            saveDialogResult();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -94,6 +77,25 @@ namespace Microsoft.TextEditor
         private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             richTextBox1.Paste();
+        }
+
+        private void saveDialogResult()
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Text File (.txt)|*.txt";
+            saveFileDialog.Title = ProductName;
+
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                File.WriteAllText(saveFileDialog.FileName, richTextBox1.Text);
+            }
+
+        }
+
+        private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1.SelectAll();
         }
     }
 }
